@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+        }
+        .dropdown {
+            margin: 20px 0;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .download-link {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function updateDownloadLinks() {
+            var version = document.getElementById('versionSelect').value;
+            var downloadLinksContainer = document.getElementById('downloadLinks');
+            
+            var links = {
+                '1.1': [
+                    { text: 'Download Version 1.1 (Script)', url: 'https://github.com/PBitMinecraft/Prime-Number-Generator/releases/download/1.1/prime_number_generator.py' },
+                    { text: 'Download Version 1.1 (EXE)', url: 'https://github.com/PBitMinecraft/Prime-Number-Generator/releases/download/1.1/prime_number_generator.exe' }
+                ],
+                '1.0': [
+                    { text: 'Download Version 1.0', url: 'https://github.com/PBitMinecraft/Prime-Number-Generator/releases/download/1.0/prime_number_generator.py' }
+                ]
+            };
+
+            downloadLinksContainer.innerHTML = '';
+
+            if (links[version]) {
+                links[version].forEach(function(link) {
+                    var a = document.createElement('a');
+                    a.href = link.url;
+                    a.innerText = link.text;
+                    a.className = 'download-link';
+                    a.target = '_blank';
+                    downloadLinksContainer.appendChild(a);
+                });
+            } else {
+                downloadLinksContainer.innerHTML = '<p>No download links available for this version.</p>';
+            }
+        }
+
+        window.onload = updateDownloadLinks;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Downloads | <a href="index.html">Back</a></h1></h1>
+        <div class="dropdown">
+            <label for="versionSelect">Select a version:</label>
+            <select id="versionSelect" onchange="updateDownloadLinks()">
+                <option value="1.1">1.1</option>
+                <option value="1.0">1.0</option>
+            </select>
+        </div>
+        <div id="downloadLinks"></div>
+    </div>
+</body>
+</html>
